@@ -14,13 +14,15 @@ pipeline {
                     files.each { f ->
                         // add each object from the 'files' loop to the 'tests' array
                         tests[f] = {
-                            node('cloud-node') {
-                                echo f.toString()
-                                cleanWs()
-                                sh "git clone git@github.com:wolfssl/wolfssl"
-                                sh "git clone git@github.com:wolfssl/testing"
-                                sh "cd wolfssl && ./autogen.sh && ./configure ${f} && make && make check"
-//                                sh "cd wolfssl && ../testing/jenkins-scripts/stable/PRB/config/PRB-generic-config-parser.sh ../testing/jenkins-configure-options-files/backups/${f}"
+                            timeout(10) { // 10 minute timeout
+                                node('cloud-node') {
+                                    echo f.toString()
+                                    cleanWs()
+                                    sh "git clone git@github.com:wolfssl/wolfssl"
+                                    sh "git clone git@github.com:wolfssl/testing"
+                                    sh "cd wolfssl && ./autogen.sh && ./configure ${f} && make && make check"
+                                    //sh "cd wolfssl && ../testing/jenkins-scripts/stable/PRB/config/PRB-generic-config-parser.sh ../testing/jenkins-configure-options-files/backups/${f}"
+                                }
                             }
                         }
                     }
