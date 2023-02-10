@@ -12,8 +12,8 @@ pipeline {
                         sh "git clone git@github.com:wolfssl/wolfssl"
                         sh "git clone git@github.com:wolfssl/testing"
                         sh "ls -la"
-                        sh "./autogen.sh"
-                        sh ".testing/jenkins-scripts/stable/PRB/config/PRB-generic-config-parser-multithreaded.sh .testing/jenkins-configure-options-files/backups/PRB-enable-options-partA.txt"
+                        sh "ls -la .."
+                        sh "cd wolfssl && ../testing/jenkins-scripts/stable/PRB/config/PRB-generic-config-parser-multithreaded.sh ../testing/jenkins-configure-options-files/backups/PRB-enable-options-partA.txt"
                     }
                 }
             }
