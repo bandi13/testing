@@ -19,7 +19,7 @@ pipeline {
                                 cleanWs()
                                 sh "git clone git@github.com:wolfssl/wolfssl"
                                 sh "git clone git@github.com:wolfssl/testing"
-                                sh "cd wolfssl && ./autogen.sh && ./configure ${f} && make"
+                                sh "cd wolfssl && ./autogen.sh && ./configure ${f} && make && make check"
 //                                sh "cd wolfssl && ../testing/jenkins-scripts/stable/PRB/config/PRB-generic-config-parser.sh ../testing/jenkins-configure-options-files/backups/${f}"
                             }
                         }
